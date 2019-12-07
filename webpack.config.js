@@ -9,6 +9,7 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     vis_suffix_tree: './src/vis_suffix_tree.ts',
+    vis_dag: './src/vis_dag.ts',
   },
   output: {
     filename: '[name].js',

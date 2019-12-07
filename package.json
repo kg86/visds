@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/node": "^10.10.1",
+    "@types/power-assert": "^1.5.0",
     "vis-network": "^6.4.6",
     "webpack": "^4.17.1"
   },

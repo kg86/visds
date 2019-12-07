@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>DAG</title>
+
+    <style type="text/css">
+      body {
+        font: 18pt sans;
+        text-align: center;
+      }
+
+      #network {
+        width: 800px;
+        height: 400px;
+        border: 1px solid lightgray;
+        margin: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Visualization of Directed Acyclic Graphs</h2>
+    <br />
+    <div style="width: 800px; margin:auto">
+      usage: Each line indicates a rule. <br />
+      ",", " ", and "=" are delimiters, and the first literal indicates the
+      left-hand side of the rule and the rest literals are the right-hand side
+      of the rule.
+    </div>
+    <br />
+
+    <textarea rows="9" cols="40" id="input_text" type="text">
+1 = b
+2 = a
+3 = 2, 1
+4 = 3, 2
+5 = 4, 3
+6 = 5, 4
+7 = 6, 5
+</textarea
+    >
+    <br />
+
+    <div id="network"></div>
+
+    <p id="selection"></p>
+    <script type="text/javascript" src="./vis_dag.js"></script>
+  </body>
+</html>
