@@ -3,4 +3,4 @@
 ## List of Visualizer
 
 - [Suffix Tree](https://kg86.github.io/visds/dist/vis_suffix_tree.html)
-- [DAG](https://kg86.github.io/visds/dist/vis_dag.html)
+- [Derivation Tree of non-recursive CFG (DAG which has one root)](https://kg86.github.io/visds/dist/vis_dag.html)
