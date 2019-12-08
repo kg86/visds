@@ -192,12 +192,12 @@ class StrTree {
   }
 }
 
-export function suffix_tree(text: string) {
+export function suffix_tree(text: string, build_suffix_links: boolean) {
   const st = new StrTree()
   for (let i = 0; i < text.length; i++) {
     st.insert(text.substr(i), i)
   }
-  st.build_suffix_links()
+  if (build_suffix_links) st.build_suffix_links()
   return st
 }
 
