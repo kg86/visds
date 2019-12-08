@@ -30,16 +30,3 @@ const main = () => {
 }
 
 main()
-// network.on('hoverEdge', function(e) {
-//   console.log(e)
-//   this.body.data.edges.update({ id: e.edge, font: { size: 34 } })
-// })
-// network.on('blurEdge', function(e) {
-//   console.log(e)
-//   this.body.data.edges.update({ id: e.edge, font: { size: 14 } })
-// })
-
-// $('#input_text').on('input', redraw)
-// $(document).ready(() => {
-//   redraw()
-// })

@@ -2,12 +2,19 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>DAG</title>
+    <title>Visualization of non-recursive CFGs (DAGs)</title>
 
     <style type="text/css">
+      * {
+        box-sizing: border-box;
+
+        /* border-style: dotted; */
+      }
       body {
         font: 18pt sans;
         text-align: center;
+        width: 850px;
+        margin: auto;
       }
 
       #network {
@@ -16,21 +23,24 @@
         border: 1px solid lightgray;
         margin: auto;
       }
+      .table {
+        display: table-cell;
+      }
+
+      .twocolumn {
+        display: table-cell;
+        vertical-align: middle;
+        width: 50%;
+      }
     </style>
   </head>
 
   <body>
-    <h2>Visualization of Directed Acyclic Graphs</h2>
-    <br />
-    <div style="width: 800px; margin:auto">
-      usage: Each line indicates a rule. <br />
-      ",", " ", and "=" are delimiters, and the first literal indicates the
-      left-hand side of the rule and the rest literals are the right-hand side
-      of the rule.
-    </div>
-    <br />
+    <h2>Visualization of non-recursive CFGs (DAGs)</h2>
 
-    <textarea rows="9" cols="40" id="input_text" type="text">
+    <div class="table">
+      <div class="twocolumn">
+        <textarea rows="9" cols="40" id="input_text" type="text">
 1 = b
 2 = a
 3 = 2, 1
@@ -39,12 +49,37 @@
 6 = 5, 4
 7 = 6, 5
 </textarea
-    >
-    <br />
+        >
+      </div>
+      <div class="twocolumn">
+        <ul style="list-style-type: disc; text-align: left; font-size: 16px;">
+          <li>Each line indicates a rule.</li>
+          <li>
+            ",", " ", and "=" are delimiters, and the first literal indicates
+            the left-hand side of the rule and the rest literals are the
+            right-hand side of the rule.
+          </li>
+          <li>
+            Rules must be indentified by numbers and left-hand side of the rule
+            must be greater than the right-hand side.
+          </li>
+          <li>
+            The rule identified by the maximum number is the root of the CFG.
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <div id="network"></div>
 
-    <p id="selection"></p>
+    <div style="width: 600px; margin: auto;">
+      <h2>Links</h2>
+      <ul style="list-style-type: disc; text-align: left;">
+        <li>
+          <a href="https://kg86.github.io/visds/">Data Structure Visualizer</a>
+        </li>
+      </ul>
+    </div>
     <script type="text/javascript" src="./vis_dag.js"></script>
   </body>
 </html>
