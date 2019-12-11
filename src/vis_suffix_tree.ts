@@ -37,10 +37,12 @@ const main = () => {
   show_sl_btn.addEventListener('change', redraw)
   network.on('hoverEdge', e => {
     console.log('hoverEdge', e)
+    // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 34 } })
   })
   network.on('blurEdge', e => {
     console.log('blurEdge', e)
+    // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 14 } })
   })
   redraw()
