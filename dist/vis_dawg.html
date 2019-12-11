@@ -2,27 +2,29 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Suffix Tree</title>
+    <title>Visualization of Directed Acyclic Word Graphs (DAWGs)</title>
 
     <link rel="stylesheet" type="text/css" href="./my.css" />
   </head>
 
   <body>
-    <h2>Visualization of Suffix Trees</h2>
-    Input String:
-    <input id="input_text" type="text" value="cocoa" style="font-size: 32px;" />
+    <h2>Visualization of Directed Acyclic Word Graphs (DAWGs)</h2>
+
+    <input id="input_text" type="text" value="cocoa" style="font-size:32px" />
     Show Suffix Links:
     <input id="show_suffix_links" type="checkbox" checked />
     <br />
 
     <div id="network"></div>
 
+    <p id="selection"></p>
+
     <div style="width: 600px; margin: auto;">
       <h2>Links</h2>
       <ul style="list-style-type: disc; text-align: left;">
         <li>
-          <a href="https://en.wikipedia.org/wiki/Suffix_tree"
-            >Suffix Tree (wikipedia)</a
+          <a href="https://en.wikipedia.org/wiki/Suffix_automaton"
+            >Suffix Automaton (wikipedia)</a
           >
         </li>
         <li>
@@ -30,6 +32,6 @@
         </li>
       </ul>
     </div>
-    <script type="text/javascript" src="./vis_suffix_tree.js"></script>
+    <script type="text/javascript" src="./vis_dawg.js"></script>
   </body>
 </html>

@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+
+  /* border-style: dotted; */
+}
+body {
+  font: 18pt sans;
+  text-align: center;
+  width: 850px;
+  margin: auto;
+}
+
+#network {
+  width: 800px;
+  height: 400px;
+  border: 1px solid lightgray;
+  margin: auto;
+}
+.table {
+  display: table-cell;
+}
+
+.twocolumn {
+  display: table-cell;
+  vertical-align: middle;
+  width: 50%;
+}
