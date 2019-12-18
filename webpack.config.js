@@ -11,6 +11,8 @@ module.exports = {
     vis_suffix_tree: './src/vis_suffix_tree.ts',
     vis_dag: './src/vis_dag.ts',
     vis_dawg: './src/vis_dawg.ts',
+    vis_cdawg: './src/vis_cdawg.ts',
+    cdawg: './src/cdawg.ts',
   },
   output: {
     filename: '[name].js',
