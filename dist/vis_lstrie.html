@@ -2,25 +2,27 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>
-      Visualization of Compact Directed Acyclic Word Graph (CDAWG)
-    </title>
+    <meta http-equiv="Cache-Control" content="no-cache" />
+
+    <title>Visualization of Linear Size Suffix Trie</title>
 
     <link rel="stylesheet" type="text/css" href="./my.css" />
     <link rel="stylesheet" type="text/css" href="./vis-network.min.css" />
   </head>
 
   <body>
-    <h2>Visualization of Compact Directed Acyclic Word Graph (CDAWG)</h2>
+    <h2>Visualization of Linear Size Suffix Trie</h2>
 
-    <input
-      id="input_text"
-      type="text"
-      value="abcabcaba"
-      style="font-size:32px"
-    />
+    <input id="input_text" type="text" value="cocoa" style="font-size:32px;" />
+    <br />
     Show Suffix Links:
     <input id="show_suffix_links" type="checkbox" checked />
+    <br />
+    Show Extended Suffix Links:
+    <input id="show_extended_suffix_links" type="checkbox" checked />
+    <br />
+    Create Implicit Node:
+    <input id="create_implicit_node" type="checkbox" />
     <br />
 
     <div id="network"></div>
@@ -32,16 +34,15 @@
       <ul style="list-style-type: disc; text-align: left;">
         <li>
           <a
-            href="https://hal-upec-upem.archives-ouvertes.fr/hal-00620801/file/9703-CSA.pdf"
-            >(PDF) On Compact Directed Acyclic Word Graphs by Chrochemore and
-            Verin</a
-          >
+            href="https://www.sciencedirect.com/science/article/pii/S0304397516300305"
+            >Paper of Linear Size Suffix Trie
+          </a>
         </li>
         <li>
           <a href="https://kg86.github.io/visds/">Data Structure Visualizer</a>
         </li>
       </ul>
     </div>
-    <script type="text/javascript" src="./vis_cdawg.js"></script>
+    <script type="text/javascript" src="./vis_lstrie.js"></script>
   </body>
 </html>
