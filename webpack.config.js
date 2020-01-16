@@ -1,5 +1,7 @@
+const webpack = require('webpack')
 const path = require('path')
 const TypedocWebpackPlugin = require('typedoc-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -13,6 +15,9 @@ module.exports = {
     vis_dawg: './src/vis_dawg.ts',
     vis_cdawg: './src/vis_cdawg.ts',
     cdawg: './src/cdawg.ts',
+    vis_lstrie: './src/vis_lstrie.ts',
+    // hoge: './src/hoge.ts',
+    // fuga: './src/fuga.js',
   },
   output: {
     filename: '[name].js',
@@ -27,6 +32,10 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader',
+      },
+      {
+        test: /\.html$/,
+        use: 'html-loader',
       },
     ],
   },
@@ -50,5 +59,11 @@ module.exports = {
       },
       ['./src/'],
     ),
+    // new HtmlWebpackPlugin({
+    //   inject: true,
+    //   filename: `${filename}.html`,
+    //   chunks: '[filename]',
+    //   template: 'src/hoge.html',
+    // }),
   ],
 }

@@ -4,7 +4,9 @@
   "description": "Data Structure Visualizer",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch --info-verbosity verbose"
   },
   "keywords": [],
   "author": "GOTO Keisuke",
@@ -19,6 +21,8 @@
     "@types/jest": "^23.3.2",
     "@types/vis": "^4.21.19",
     "css-loader": "^2.1.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "power-assert": "^1.6.0",
     "ts-jest": "^23.10.1",
