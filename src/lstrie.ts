@@ -105,12 +105,22 @@ class StrTree {
     return branch_node
   }
 
-  insert(text: string, i: number) {
+  insert(text: string, i: number, create_implicit_node: boolean) {
     const [parent, child, match_len_edge, match_len_all] = this.find_branch(
       this.root,
       text,
     )
 
+    console.log(
+      'insert [',
+      text,
+      '] match_len=',
+      match_len_edge,
+      ' match_len_all=',
+      match_len_all,
+    )
+    // check whether or not the point is implicit node.
+    if (match_len_all === text.length && !create_implicit_node) return
     if (match_len_edge < text.length) {
       const branch_node =
         child === parent
@@ -244,14 +254,19 @@ class StrTree {
   }
 }
 
-export const build_lstrie = (text: string) => {
+export const build_lstrie = (
+  text: string,
+  show_suffix_links: boolean,
+  show_extended_suffix_links: boolean,
+  create_implicit_node: boolean,
+) => {
   const lstrie = new StrTree()
 
   for (let i = 0; i < text.length; i++) {
-    lstrie.insert(text.substr(i), i)
+    lstrie.insert(text.substr(i), i, create_implicit_node)
   }
-  lstrie.build_suffix_links()
-  lstrie.build_extend_suffix_links()
+  if (show_suffix_links) lstrie.build_suffix_links()
+  if (show_extended_suffix_links) lstrie.build_extend_suffix_links()
   console.log('eslinks')
   for (const [from, to] of lstrie.elinks.entries()) {
     console.log('eslink[' + from.birth_time + ', ' + to.birth_time + ']')
@@ -260,7 +275,7 @@ export const build_lstrie = (text: string) => {
 }
 
 const main = (text: string) => {
-  const lstrie = build_lstrie(text)
+  const lstrie = build_lstrie(text, false, false, false)
   console.log(lstrie.json)
 }
 
