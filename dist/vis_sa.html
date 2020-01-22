@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Visualization of Suffix Array</title>
+
+    <script src="./vue.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script> -->
+
+    <link rel="stylesheet" type="text/css" href="vis_sa.css" />
+    <link rel="stylesheet" type="text/css" href="./my.css" />
+  </head>
+  <body>
+    <h2>Visualization of Suffix Array</h2>
+    <div id="input_str">
+      <input
+        id="str"
+        type="text"
+        v-model="   str"
+        placeholder="insert a string"
+        style="font-size:32px;"
+      />
+      <table style="font-size: 150%;">
+        <tr>
+          <td v-for="char in chars" class="idx">{{ char.idx }}</td>
+        </tr>
+
+        <tr>
+          <td
+            v-for="char in chars"
+            class="char"
+            v-bind:class="{ 'ltype': char.isL, 'stype': !char.isL, 'lml': char.isLML, 'lms':char.isLMS }"
+          >
+            {{ char.char }}
+          </td>
+        </tr>
+      </table>
+
+      red: L type, blue: S type, underline: left most L/S type
+      <hr />
+      <table class="char">
+        <tr>
+          <th>i</th>
+          <th>SA[i]</th>
+          <th>suffix i</th>
+        </tr>
+        <tr v-for="i in str.length">
+          <td>{{i}}</td>
+          <td>{{sa[i]}}</td>
+          <td class="str">
+            <span
+              v-for="p in range(sa[i], str.length)"
+              v-bind:class="{ 'ltype': chars[p].isL, 'stype': !chars[p].isL, 'lml': chars[p].isLML, 'lms':chars[p].isLMS }"
+              >{{str[p]}}</span
+            >
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div style="width: 600px; margin: auto;">
+      <h2>Links</h2>
+      <ul style="list-style-type: disc; text-align: left;">
+        <li>
+          <a href="https://en.wikipedia.org/wiki/Suffix_array"
+            >(Wikipedia) Suffix Array</a
+          >
+        </li>
+        <li>
+          <a href="https://kg86.github.io/visds/">Data Structure Visualizer</a>
+        </li>
+      </ul>
+    </div>
+    <script src="vis_sa.js"></script>
+  </body>
+</html>

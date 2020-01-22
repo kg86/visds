@@ -1,0 +1,40 @@
+.idx {
+    font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+    border: 1px solid;
+    text-align: center;
+}
+
+.char {
+    font-size: 100%;
+    font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+    border: 1px solid;
+    text-align: center;
+}
+
+.str{
+    text-align: left;
+}
+
+.ltype {
+    color: red;
+}
+
+.lml {
+    /*color: darkred;*/
+    text-decoration: underline;
+}
+
+.stype {
+    color: blue;
+}
+
+.lms {
+    /*color: darkblue;*/
+    text-decoration: underline;
+}
+table, td, th{
+    border-collapse: collapse;
+    border:1px solid #333;
+    /* text-align: center; */
+    margin: auto;
+}
