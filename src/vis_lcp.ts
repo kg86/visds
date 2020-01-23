@@ -12,13 +12,12 @@ import { getSA, getLCP } from './sa'
 const getCharType = (str: string, sa: number[]): string[] => {
   const n = str.length
   const res = Array<string>(n)
-  res[0] = 'normal'
-  for (let i = 1; i < n; i++) {
+  for (let i = 0; i < n; i++) {
     if (str[sa[i]] !== str[sa[i - 1]]) {
       res[sa[i]] = 'normal'
     } else {
       if (sa[i] === 0 || sa[i - 1] === 0) res[sa[i]] = 'irreducible'
-      else if (str[sa[i] - 1] === str[sa[i - 1] - 1]) res[sa[i]] = 'irreducible'
+      else if (str[sa[i] - 1] !== str[sa[i - 1] - 1]) res[sa[i]] = 'irreducible'
       else res[sa[i]] = 'reducible'
     }
   }

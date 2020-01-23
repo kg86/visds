@@ -40,10 +40,10 @@ table, td, th{
     margin: auto;
 }
 
-.irreducible{
+.reducible{
     color: red;
 }
 
-.reducible{
+.irreducible{
     color: blue;
 }
