@@ -55,8 +55,10 @@
               v-if="lcpa[i]>0"
               v-bind:class="{'reducible':ctype[sa[i]]==='reducible', 'irreducible':ctype[sa[i]]==='irreducible'}"
               >{{str[sa[i]]}}</span
-            ><span v-if="lcpa[i]>0" style="color: red;"
-              >{{str.substr(sa[i]+1,lcpa[i]-1)}}</span
+            ><span
+              v-for="j in Math.max(0, (lcpa[i]-1))"
+              v-bind:class="{'reducible':ctype[sa[i]+1+j]==='reducible', 'irreducible':ctype[sa[i]+1+j]==='irreducible'}"
+              >{{str[sa[i]+1+j]}}</span
             ><span style="color: black;">{{str.substr(sa[i]+lcpa[i])}}</span
             ><span style="color: lightgray;">{{str.substr(0,sa[i])}}</span>
           </td>
