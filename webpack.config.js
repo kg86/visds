@@ -17,6 +17,7 @@ module.exports = {
     cdawg: './src/cdawg.ts',
     vis_lstrie: './src/vis_lstrie.ts',
     vis_sa: './src/vis_sa.ts',
+    vis_lcp: './src/vis_lcp.ts',
     // hoge: './src/hoge.ts',
     // fuga: './src/fuga.js',
   },
