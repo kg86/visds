@@ -42,11 +42,13 @@
         <tr>
           <th>i</th>
           <th>SA[i]</th>
+          <th>LCP[i]</th>
           <th>suffix i</th>
         </tr>
         <tr v-for="i in str.length">
           <td>{{i}}</td>
           <td>{{sa[i]}}</td>
+          <td>{{lcpa[i]}}</td>
           <td class="str">
             <span
               v-for="p in range(sa[i], str.length)"
@@ -67,12 +69,17 @@
           >
         </li>
         <li>
-          <a href="https://kg86.github.io/visds/">Data Structure Visualizer</a>
+          <a href="https://en.wikipedia.org/wiki/LCP_array"
+            >(Wikipedia) LCP Array</a
+          >
         </li>
         <li>
           <a href="https://tudocomp.github.io/arrays/index.html"
             >Quick Arrays</a
           >
+        </li>
+        <li>
+          <a href="https://kg86.github.io/visds/">Data Structure Visualizer</a>
         </li>
       </ul>
     </div>

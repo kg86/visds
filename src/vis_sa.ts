@@ -1,3 +1,5 @@
+import { lcp } from './strlib'
+import { getSA, getLCP } from './sa'
 class Char {
   char: string
   isL: boolean
@@ -20,9 +22,6 @@ class Char {
   }
 }
 
-//let test=range(0, 10)
-//console.log(test)
-
 // return the Char array
 function getChars(str: string) {
   let chars: Char[] = []
@@ -42,50 +41,6 @@ function getChars(str: string) {
   console.log('getChars', str, chars)
   return chars
 }
-function showSA(str: string, sa: number[]) {
-  for (let i = 0; i < str.length; i++) {
-    console.log(i, sa[i], str.substr(sa[i]), str.charCodeAt(sa[i]))
-  }
-}
-function getSA(str: string) {
-  const n = str.length
-  const sa = new Array(n)
-  const rank = new Array(n)
-  const new_rank = new Array(n)
-  for (let i = 0; i < str.length; i++) {
-    sa[i] = i
-    rank[i] = str.charCodeAt(i)
-  }
-  //showSA(str, sa)
-
-  for (let k = 1; k < n; k *= 2) {
-    function compare_sa(i: number, j: number) {
-      if (rank[i] != rank[j]) return rank[i] - rank[j]
-      let ri = -1
-      let rj = -1
-      if (i + k < n) ri = rank[i + k]
-      if (j + k < n) rj = rank[j + k]
-      // return rj - ri
-      return ri - rj
-    }
-    sa.sort(compare_sa)
-    new_rank[sa[0]] = 0
-    for (let i = 1; i < n; i++) {
-      const match = compare_sa(sa[i - 1], sa[i]) ? 1 : 0
-      new_rank[sa[i]] = new_rank[sa[i - 1]] + match
-    }
-    for (let i = 0; i < n; i++) rank[i] = new_rank[i]
-  }
-  return sa
-  //console.log('finish')
-  //showSA(str, sa)
-}
-
-function setstr() {
-  console.log('setstr')
-  const input_text = document.getElementById('in_str') as HTMLInputElement
-  console.log(input_text.value)
-}
 
 const main = () => {
   // @ts-ignore
@@ -96,6 +51,7 @@ const main = () => {
       //chars: ['a', 'b']
       chars: [],
       sa: [],
+      lcpa: [],
     },
     methods: {
       setStr: function(str: string) {
@@ -115,22 +71,20 @@ const main = () => {
         console.log('watch str')
         // @ts-ignore
         this.chars = getChars(newv)
+        const sa = getSA(newv)
         // @ts-ignore
-        this.sa = getSA(newv)
+        this.sa = sa
+        // @ts-ignore
+        console.log('lcp', getLCP(newv, sa))
+        // @ts-ignore
+        this.lcpa = getLCP(newv, sa)
       },
     },
   })
-  console.log(app)
-  console.log(app.chars)
-  let str = 'しまうまのしまうまよ$'
-  str = 'All About ホームページ作成'
-  str = 'mississippi$'
+  const str = 'mississippi$'
   app.$data.str = str
-  //app.setStr(str)
   console.log(app.chars)
   getSA(str)
-
-  //message.$data.chars = [{char:'a'}, {char:'b'}]
-  console.log('hoge')
 }
+
 main()
