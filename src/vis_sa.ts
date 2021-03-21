@@ -52,6 +52,8 @@ const main = () => {
       chars: [],
       sa: [],
       lcpa: [],
+      arr_idx: 1,
+      arr_idx_checked: true,
     },
     methods: {
       setStr: function(str: string) {
@@ -79,6 +81,10 @@ const main = () => {
         // @ts-ignore
         this.lcpa = getLCP(newv, sa)
       },
+      arr_idx_checked: function (newv: boolean, oldv: boolean) {
+        // @ts-ignore
+        this.arr_idx = newv ? 1 : 0
+      }
     },
   })
   const str = 'mississippi$'

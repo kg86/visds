@@ -22,7 +22,7 @@
       />
       <table style="font-size: 150%;">
         <tr>
-          <td v-for="char in chars" class="idx">{{ char.idx }}</td>
+          <td v-for="char in chars" class="idx">{{ char.idx + arr_idx }}</td>
         </tr>
 
         <tr>
@@ -35,6 +35,7 @@
           </td>
         </tr>
       </table>
+      <input v-model="arr_idx_checked" type="checkbox">1-index <br>
 
       red: L type, blue: S type, underline: left most L/S type
       <hr />
@@ -45,8 +46,8 @@
           <th>suffix SA[i]</th>
         </tr>
         <tr v-for="i in str.length">
-          <td>{{i}}</td>
-          <td>{{sa[i]}}</td>
+          <td>{{i + arr_idx}}</td>
+          <td>{{sa[i] + arr_idx}}</td>
           <td class="str">
             <span
               v-for="p in range(sa[i], str.length)"
