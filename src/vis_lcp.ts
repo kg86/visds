@@ -47,6 +47,8 @@ const main = () => {
       lcpa: [],
       reducible: [],
       ctype: [],
+      arr_idx: 0,
+      arr_idx_checked: false,
     },
     methods: {
       setStr: function(str: string) {
@@ -82,6 +84,10 @@ const main = () => {
         // @ts-ignore
         console.log('ctype', this.ctype)
       },
+      arr_idx_checked: function (newv: boolean, oldv: boolean) {
+        // @ts-ignore
+        this.arr_idx = newv ? 1 : 0
+      }
     },
   })
   const str = 'mississippi$'

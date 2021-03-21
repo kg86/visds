@@ -52,8 +52,8 @@ const main = () => {
       chars: [],
       sa: [],
       lcpa: [],
-      arr_idx: 1,
-      arr_idx_checked: true,
+      arr_idx: 0,
+      arr_idx_checked: false,
     },
     methods: {
       setStr: function(str: string) {
