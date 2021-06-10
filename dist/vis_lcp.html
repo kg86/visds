@@ -18,24 +18,27 @@
         type="text"
         v-model="str"
         placeholder="insert a string"
-        style="font-size:32px;"
+        style="font-size: 32px"
       />
-      <table style="font-size: 150%;">
+      <table style="font-size: 150%">
         <tr>
-          <td v-for="i in str.length" class="idx" width="45px">{{ i + arr_idx }}</td>
+          <td v-for="i in str.length" class="idx" width="45px">
+            {{ i + arr_idx }}
+          </td>
         </tr>
 
         <tr>
           <td
             v-for="i in str.length"
             class="char"
-            v-bind:class="{'reducible': ctype[i]==='reducible', 'irreducible':ctype[i]==='irreducible'}"
+            v-bind:class="{'reducible': color_lcp&ctype[i]==='reducible', 'irreducible':color_lcp&ctype[i]==='irreducible'}"
           >
-            {{ str[i] }}
+            {{str[i]}}
           </td>
         </tr>
       </table>
-      <input v-model="arr_idx_checked" type="checkbox">1-index <br>
+      <input v-model="arr_idx_checked" type="checkbox" />1-index;
+      <input v-model="color_lcp" checked="true" type="checkbox" />color lcp<br />
 
       red: reducible lcp, blue: irreducible lcp
 
@@ -54,22 +57,22 @@
           <td class="str">
             <span
               v-if="lcpa[i]>0"
-              v-bind:class="{'reducible':ctype[sa[i]]==='reducible', 'irreducible':ctype[sa[i]]==='irreducible'}"
+              v-bind:class="{'reducible':color_lcp&ctype[sa[i]]==='reducible', 'irreducible':color_lcp&ctype[sa[i]]==='irreducible'}"
               >{{str[sa[i]]}}</span
             ><span
               v-for="j in Math.max(0, (lcpa[i]-1))"
-              v-bind:class="{'reducible':ctype[sa[i]+1+j]==='reducible', 'irreducible':ctype[sa[i]+1+j]==='irreducible'}"
+              v-bind:class="{'reducible':color_lcp&ctype[sa[i]+1+j]==='reducible', 'irreducible':color_lcp&ctype[sa[i]+1+j]==='irreducible'}"
               >{{str[sa[i]+1+j]}}</span
-            ><span style="color: black;">{{str.substr(sa[i]+lcpa[i])}}</span
-            ><span style="color: lightgray;">{{str.substr(0,sa[i])}}</span>
+            ><span style="color: black">{{str.substring(sa[i]+lcpa[i])}}</span
+            ><span style="color: lightgray">{{str.substr(0,sa[i])}}</span>
           </td>
         </tr>
       </table>
     </div>
 
-    <div style="width: 600px; margin: auto;">
+    <div style="width: 600px; margin: auto">
       <h2>Links</h2>
-      <ul style="list-style-type: disc; text-align: left;">
+      <ul style="list-style-type: disc; text-align: left">
         <li>
           <a href="https://en.wikipedia.org/wiki/Suffix_array"
             >(Wikipedia) Suffix Array</a
