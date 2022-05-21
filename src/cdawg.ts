@@ -273,6 +273,7 @@ class CDAWG {
     if (this.text.length === 1) {
       this.create_open_edge(this.root, 0)
       this.ap = new State(this.root)
+      this.sink.slink = this.root
       return
     }
     let next_state: State | undefined
