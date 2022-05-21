@@ -237,7 +237,7 @@ class CDAWG {
     new_node.in_edges = node.in_edges.slice(num_in_edge_left)
     node.in_edges = node.in_edges.slice(0, num_in_edge_left)
 
-    new_node.in_edges.forEach(edge => {
+    new_node.in_edges.forEach((edge) => {
       edge.child = new_node
     })
 
@@ -336,6 +336,11 @@ class CDAWG {
       next_state = new State(branch_node)
     }
     this.ap = next_state
+    if (this.ap.atNode) {
+      this.sink.slink = this.ap.parent
+    } else {
+      this.sink.slink = this.sink
+    }
     console.log('insert end, ap is', this.ap)
   }
 
@@ -347,7 +352,7 @@ class CDAWG {
     const max_roundness = 0.5
     const min_roundness = -0.5
     const roundness = (edge: Edge) => {
-      const ebirth = Array.from(edge.parent.out_edges.values()).map(e => [
+      const ebirth = Array.from(edge.parent.out_edges.values()).map((e) => [
         e.birth_time,
         e,
       ])
@@ -367,7 +372,7 @@ class CDAWG {
         )
     }
 
-    this.nodes.forEach(node => {
+    this.nodes.forEach((node) => {
       const n = {
         label: '' + node.birth_time,
         id: node.birth_time,
@@ -377,8 +382,9 @@ class CDAWG {
       nodes.push(n)
     })
     if (show_suffix_links) {
-      this.nodes.forEach(node => {
-        if (node.slink && node !== this.root) {
+      this.nodes.forEach((node) => {
+        if (node.slink != node && node !== this.root) {
+          // if (node.slink && node !== this.root) {
           const e = {
             from: nid.get(node),
             to: nid.get(node.slink),
@@ -397,14 +403,14 @@ class CDAWG {
       const n = nodes[nid.get(node)]
       if (n.level < level) {
         n.level = level
-        node.out_edges.forEach(edge => {
+        node.out_edges.forEach((edge) => {
           set_level_rec(edge.child, n.level + 1)
         })
       }
     }
     set_level_rec(this.root, 0)
 
-    this.edges.forEach(edge => {
+    this.edges.forEach((edge) => {
       const e = {
         from: nid.get(edge.parent),
         to: nid.get(edge.child),
