@@ -21,12 +21,16 @@ let networkData = {
 const redraw = () => {
   const input_text = (document.getElementById('input_text') as HTMLInputElement)
     .value
-  const show_suffix_links = (document.getElementById(
-    'show_suffix_links',
-  ) as HTMLInputElement).checked
+  const show_suffix_links = (
+    document.getElementById('show_suffix_links') as HTMLInputElement
+  ).checked
+  const implicit_cdawg = (
+    document.getElementById('implicit_cdawg') as HTMLInputElement
+  ).checked
   console.log('input_text', input_text)
   console.log('show_suffix_links', show_suffix_links)
-  const cdawg = build_cdawg(input_text)
+  console.log('implicit_cdawg', implicit_cdawg)
+  const cdawg = build_cdawg(input_text, implicit_cdawg)
   console.log(cdawg)
   const json = cdawg.json(show_suffix_links)
   console.log(json)
@@ -46,13 +50,17 @@ const main = () => {
     'show_suffix_links',
   ) as HTMLElement
   show_sl_btn.addEventListener('change', redraw)
+  const implicit_cdawg_btn = document.getElementById(
+    'implicit_cdawg',
+  ) as HTMLElement
+  implicit_cdawg_btn.addEventListener('change', redraw)
 
-  network.on('hoverEdge', function(e) {
+  network.on('hoverEdge', function (e) {
     console.log('hoverEdge', e)
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 34 } })
   })
-  network.on('blurEdge', function(e) {
+  network.on('blurEdge', function (e) {
     console.log('blurEdge', e)
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 14 } })

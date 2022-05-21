@@ -345,6 +345,14 @@ class CDAWG {
     console.log('insert end, ap is', this.ap)
   }
 
+  /// transforms CDAWG implicit to explicit.
+  /// creates a node corresponding to an active node.
+  explicit() {
+    if (!this.ap.atNode) {
+      this.sink.slink = this.split(this.ap)
+    }
+  }
+
   json(show_suffix_links: boolean = true) {
     const nodes: any = []
     const edges: any = []
@@ -434,13 +442,13 @@ class CDAWG {
   }
 }
 
-export const build_cdawg = (
-  text: string,
-  show_suffix_links: boolean = false,
-) => {
+export const build_cdawg = (text: string, implicit_cdawg: boolean = false) => {
   const cdawg = new CDAWG()
   for (const c of text) {
     cdawg.insert(c)
+  }
+  if (!implicit_cdawg) {
+    cdawg.explicit()
   }
   return cdawg
 }
