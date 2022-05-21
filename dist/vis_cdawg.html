@@ -2,18 +2,21 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP991L8GM"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-CHP991L8GM"
+    ></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
 
-      gtag('config', 'G-CHP991L8GM');
+      gtag('config', 'G-CHP991L8GM')
     </script>
     <meta charset="UTF-8" />
-    <title>
-      Visualization of Compact Directed Acyclic Word Graph (CDAWG)
-    </title>
+    <title>Visualization of Compact Directed Acyclic Word Graph (CDAWG)</title>
 
     <link rel="stylesheet" type="text/css" href="./my.css" />
     <link rel="stylesheet" type="text/css" href="./vis-network.min.css" />
@@ -26,19 +29,22 @@
       id="input_text"
       type="text"
       value="abcabcaba"
-      style="font-size:32px"
+      style="font-size: 32px"
     />
+    <br />
     Show Suffix Links:
     <input id="show_suffix_links" type="checkbox" checked />
+    Implicit CDAWG:
+    <input id="implicit_cdawg" type="checkbox" checked />
     <br />
 
     <div id="network"></div>
 
     <p id="selection"></p>
 
-    <div style="width: 600px; margin: auto;">
+    <div style="width: 600px; margin: auto">
       <h2>Links</h2>
-      <ul style="list-style-type: disc; text-align: left;">
+      <ul style="list-style-type: disc; text-align: left">
         <li>
           <a
             href="https://hal-upec-upem.archives-ouvertes.fr/hal-00620801/file/9703-CSA.pdf"
