@@ -348,9 +348,21 @@ class CDAWG {
   /// transforms CDAWG implicit to explicit.
   /// creates a node corresponding to an active node.
   explicit() {
-    if (!this.ap.atNode) {
-      this.sink.slink = this.split(this.ap)
+    let prev_node = this.sink
+    while (!this.ap.atNode) {
+      const edge_beg = this.ap.edge.edge_beg
+      const match_len = this.ap.match_len
+      const node = this.split(this.ap)
+      prev_node.slink = node
+      prev_node = node
+      this.ap = this.move_trust(
+        this.ap.parent.slink,
+        this.text,
+        edge_beg + 1,
+        match_len,
+      )
     }
+    prev_node.slink = this.ap.parent
   }
 
   json(show_suffix_links: boolean = true) {
@@ -399,7 +411,8 @@ class CDAWG {
             to: nid.get(node.slink),
             id: 'e[' + nid.get(node) + ']-[' + nid.get(node.slink) + ']',
             dashes: true,
-            color: { color: node.is_explicit ? '#848484' : '#ff0000' },
+            // color: { color: node.is_explicit ? '#848484' : '#ff0000' },
+            color: { color: '#848484' },
             // , label: edge.str
             font: { align: 'top' },
             smooth: { type: 'curvedCW', roundness: 0.4 },
