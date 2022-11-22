@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch --info-verbosity verbose",
-    "start": "webpack-dev-server"
+    "watch": "webpack --watch --info-verbosity verbose"
   },
   "keywords": [],
   "author": "GOTO Keisuke",
@@ -33,7 +32,7 @@
     "typedoc-webpack-plugin": "^1.1.4",
     "typescript": "^3.6.2",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.11.3",
+    "webpack-dev-server": "^3.11.2",
     "webpack-serve": "^2.0.2"
   },
   "jest": {
