@@ -358,7 +358,7 @@ class CDAWG {
       this.ap = this.move_trust(
         this.ap.parent.slink,
         this.text,
-        edge_beg,
+        edge_beg + 1,
         match_len,
       )
     }
