@@ -95,7 +95,7 @@ const main = () => {
         for (let key of Object.keys(params)) {
           url.searchParams.set(key, params[key as keyof Params].toString());
         }
-        history.pushState({}, "", url);
+        history.pushState({}, "", url.toString());
       },
     },
     watch: {
