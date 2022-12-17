@@ -16,4 +16,5 @@ jobs:
         npm install
         npm run build --if-present
         webpack
+        npx typedoc src/*.ts
 
