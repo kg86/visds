@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 // const TypedocWebpackPlugin = require("typedoc-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -47,18 +47,18 @@ module.exports = {
   //   content: 'dist/',
   // },
   plugins: [
-    //   new TypedocWebpackPlugin(
-    //     {
-    //       out: "../docs",
-    //       name: "VisDS API",
-    //       mode: "file",
-    //       target: "es6",
-    //       includeDeclarations: false,
-    //       ignoreCompilerErrors: true,
-    //       excludePrivate: true,
-    //     },
-    //     ["./src/"]
-    //   ),
+    // new TypedocWebpackPlugin(
+    //   {
+    //     out: "../docs",
+    //     name: "VisDS API",
+    //     mode: "file",
+    //     target: "es6",
+    //     includeDeclarations: false,
+    //     ignoreCompilerErrors: true,
+    //     excludePrivate: true,
+    //   },
+    //   ["./src/"]
+    // ),
     // new HtmlWebpackPlugin({
     //   inject: true,
     //   filename: `${filename}.html`,
