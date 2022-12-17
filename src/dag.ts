@@ -1,5 +1,3 @@
-import * as assert from "power-assert";
-
 class DAG {
   rules: Map<string, Array<string>>;
   root: string;
@@ -12,7 +10,7 @@ class DAG {
     this.is_finalize = false;
   }
   add(rule: Array<string>) {
-    assert(!this.is_finalize);
+    console.assert(!this.is_finalize);
     // this.rules[rule[0]] = rule.slice(1)
     this.rules.set(rule[0], rule.slice(1));
   }
