@@ -1,15 +1,11 @@
-import * as vis from "vis-network";
-
+import { DataSet, Network } from "vis-network/standalone";
 import { build_lstrie } from "./lstrie";
 import * as visjs_default_options from "./visjs_default_options";
 
 const options = visjs_default_options.options;
 const container = document.getElementById("network") as HTMLElement;
-const network = new vis.Network(container, {}, options);
-let networkData = {
-  nodes: new vis.DataSet(),
-  edges: new vis.DataSet(),
-};
+const network = new Network(container, {}, options);
+let networkData = {};
 
 interface Params {
   input_text: string;
@@ -106,7 +102,11 @@ const redraw = () => {
   console.log(lstrie);
   const json = lstrie.json;
   console.log(json);
-  network.setData(json);
+  networkData = {
+    nodes: new DataSet(json.nodes),
+    edges: new DataSet(json.edges),
+  };
+  network.setData(networkData);
 };
 
 const main = () => {

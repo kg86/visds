@@ -1,4 +1,4 @@
-import * as vis from "vis-network";
+import * as vis from "vis-network/standalone";
 
 import { parse_rules } from "./dag";
 import * as visjs_default_options from "./visjs_default_options";
@@ -19,13 +19,13 @@ const load_params_from_url = () => {
   const urlParams = new URLSearchParams(queryString);
   let params: Params = {
     input_text: `1 = b
-    2 = a
-    3 = 2, 1
-    4 = 3, 2
-    5 = 4, 3
-    6 = 5, 4
-    7 = 6, 5
-    `,
+2 = a
+3 = 2, 1
+4 = 3, 2
+5 = 4, 3
+6 = 5, 4
+7 = 6, 5
+`,
   };
 
   const urlkey = urlParams.get("input_text");

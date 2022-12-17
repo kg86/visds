@@ -1,12 +1,11 @@
-// import * as vis from 'visjs-network'
-import * as vis from "vis-network";
+import { DataSet, Network } from "vis-network/standalone";
 import { suffix_tree } from "./suffix_tree";
 import * as visjs_default_options from "./visjs_default_options";
 
 const options = visjs_default_options.options;
 const container = document.getElementById("network") as HTMLElement;
-const network = new vis.Network(container, {}, options);
-let networkData: vis.Data = {};
+const network = new Network(container, {}, options);
+let networkData = {};
 
 interface Params {
   input_text: string;
@@ -72,8 +71,8 @@ const redraw = () => {
   const json = st.json();
   console.log("json", json);
   networkData = {
-    nodes: new vis.DataSet(json.nodes),
-    edges: new vis.DataSet(json.edges),
+    nodes: new DataSet(json.nodes),
+    edges: new DataSet(json.edges),
   };
   network.setData(networkData);
 };
