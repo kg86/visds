@@ -1,5 +1,5 @@
-import * as vis from "vis-network/standalone";
-
+import { DataSet } from "vis-data/esnext";
+import { Network } from "vis-network/esnext";
 import { build_cdawg } from "./cdawg";
 import * as visjs_default_options from "./visjs_default_options";
 
@@ -11,11 +11,8 @@ options.layout.hierarchical.treeSpacing = 205;
 options.edges.smooth.type = "curvedCCW";
 
 const container = document.getElementById("network") as HTMLElement;
-const network = new vis.Network(container, {}, options);
-let networkData = {
-  nodes: new vis.DataSet(),
-  edges: new vis.DataSet(),
-};
+const network = new Network(container, {}, options);
+let networkData = {};
 
 interface Params {
   input_text: string;
@@ -89,10 +86,10 @@ const redraw = () => {
   const json = cdawg.json(params.show_suffix_links);
   console.log(json);
   networkData = {
-    nodes: new vis.DataSet(json.nodes),
-    edges: new vis.DataSet(json.edges),
+    nodes: new DataSet(json.nodes),
+    edges: new DataSet(json.edges),
   };
-  network.setData(networkData as vis.Data);
+  network.setData(networkData);
 };
 
 const main = () => {
