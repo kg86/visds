@@ -1,5 +1,4 @@
 import * as vis from "vis-network";
-// import assert from "power-assert"
 
 import { build_cdawg } from "./cdawg";
 import * as visjs_default_options from "./visjs_default_options";

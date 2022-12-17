@@ -9,7 +9,7 @@
     "watch": "webpack --watch --info-verbosity verbose"
   },
   "keywords": [],
-  "author": "GOTO Keisuke",
+  "author": "kg86",
   "license": "MIT",
   "dependencies": {
     "@types/node": "^18.11.16",
@@ -24,7 +24,6 @@
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^29.3.1",
-    "power-assert": "^1.6.1",
     "ts-jest": "^29.0.3",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",

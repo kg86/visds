@@ -18,9 +18,6 @@ module.exports = {
     vis_lstrie: "./src/vis_lstrie.ts",
     vis_sa: "./src/vis_sa.ts",
     vis_lcp: "./src/vis_lcp.ts",
-    // vis_lpf: './src/vis_lpf.ts',
-    // hoge: './src/hoge.ts',
-    // fuga: './src/fuga.js',
   },
   output: {
     filename: "[name].js",
