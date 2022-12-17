@@ -1,6 +1,4 @@
-// import * as vis from 'visjs-network'
-import { DataSet } from "vis-data/esnext";
-import { Network } from "vis-network/esnext";
+import { DataSet, Network } from "vis-network/standalone";
 import { suffix_tree } from "./suffix_tree";
 import * as visjs_default_options from "./visjs_default_options";
 
