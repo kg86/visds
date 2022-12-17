@@ -1,4 +1,4 @@
-import * as vis from "vis-network";
+import * as vis from "vis-network/standalone";
 import { DAWG } from "./dawg";
 import * as visjs_default_options from "./visjs_default_options";
 

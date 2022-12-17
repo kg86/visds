@@ -1,5 +1,5 @@
 // import * as vis from 'visjs-network'
-import * as vis from "vis-network";
+import * as vis from "vis-network/standalone";
 import { suffix_tree } from "./suffix_tree";
 import * as visjs_default_options from "./visjs_default_options";
 
