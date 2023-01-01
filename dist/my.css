@@ -25,3 +25,14 @@ body {
   vertical-align: middle;
   width: 50%;
 }
+
+.node_str_main {
+  width: 600px;
+  margin: auto;
+  text-align: left;
+}
+
+.node_str_list {
+  font-size: 16px;
+  line-height: 0.4em;
+}
