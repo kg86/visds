@@ -124,7 +124,9 @@ const show_node_str = (nid: number | null) => {
   let text = "";
   if (nid !== null) {
     const nstrs = make_node_strs();
-    text = nstrs.get(nid)!.join("<br>");
+    for (let nstr of nstrs.get(nid)!) {
+      text += "<p>" + nstr + "</p>";
+    }
   }
   elm.innerHTML = text;
 };
@@ -172,7 +174,7 @@ const main = () => {
     console.log("blurEdge", e);
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 14 } });
-    show_node_str(null);
+    // show_node_str(null);
   });
   network.on("hoverNode", (n) => {
     show_node_str(n.node);
