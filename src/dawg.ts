@@ -97,8 +97,8 @@ export class DAWG {
   }
 
   json(show_suffix_links: boolean = true) {
-    const nodes: any[] = [];
-    let edges: any[] = [];
+    const nodes: any = [];
+    let edges: any = [];
     const nid = new Map();
     let max_diff_depth = 0;
     const min_roundness = 0.2;

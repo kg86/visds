@@ -127,7 +127,7 @@ class StrTree {
   }
 
   json() {
-    const nodes: any[] = [];
+    const nodes: any = [];
     interface EdgeT {
       from: number;
       to: number;
@@ -135,11 +135,11 @@ class StrTree {
       label: string;
       font: any;
     }
-    let edges: any[] = [];
+    let edges: any = [];
     const nid = new Map();
     const create_json_node = (node: Node, level: number) => {
       if (!nid.has(node)) {
-        nid.set(node, nodes.length);
+        nid.set(node, node.birth_time);
         const ndic = {
           label: node.value === -1 ? "" : "" + node.value,
           id: nid.get(node),
@@ -196,7 +196,6 @@ export function suffix_tree(text: string, build_suffix_links: boolean) {
 const main = (text: string) => {
   const st = new StrTree();
   for (let i = 0; i < text.length; i++) {
-    console.log(i, "insert", text.substr(i));
     st.insert(text.substr(i), i);
     st.print_tree();
   }
