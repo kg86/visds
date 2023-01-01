@@ -131,13 +131,13 @@ const main = () => {
     console.log("blurEdge");
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 14 } });
-    show_node_str(null);
+    // show_node_str(null);
   });
   network.on("hoverNode", (n) => {
     show_node_str(n.node);
   });
   network.on("blurNode", (n) => {
-    show_node_str(null);
+    // show_node_str(null);
   });
 
   // load and set parameters
