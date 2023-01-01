@@ -61,7 +61,7 @@ const set_params_to_url = (params: Params) => {
   for (let key of Object.keys(params)) {
     url.searchParams.set(key, params[key as keyof Params].toString());
   }
-  history.pushState({}, "", url.toString());
+  history.replaceState({}, "", url.toString());
 };
 
 const set_params_to_html = (params: Params) => {
