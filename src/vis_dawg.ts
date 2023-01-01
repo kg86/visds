@@ -5,7 +5,11 @@ import * as visjs_default_options from "./visjs_default_options";
 const options = visjs_default_options.options;
 const container = document.getElementById("network") as HTMLElement;
 const network = new Network(container, {}, options);
-let networkData = {};
+let networkData = {
+  nodes: new DataSet([]),
+  edges: new DataSet([]),
+};
+let dawg = new DAWG();
 
 interface Params {
   input_text: string;
@@ -65,7 +69,7 @@ const redraw = function () {
   const params = load_params_from_html();
   set_params_to_url(params);
 
-  const dawg = new DAWG();
+  dawg = new DAWG();
   for (let i = 0; i < params.input_text.length; i++) {
     dawg.insert(params.input_text[i]);
   }
@@ -76,6 +80,54 @@ const redraw = function () {
     edges: new DataSet(json.edges),
   };
   network.setData(networkData);
+};
+
+/**
+ * Make a map from node id to the strings from root to the node.
+ */
+// const make_node_strs = (): Map<number, Set<string>> => {
+const make_node_strs = (): Map<number, string[]> => {
+  const json = dawg.json();
+  const map = new Map<number, string[]>();
+  // const map = new Map<number, Set<string>>();
+  // const map = new Map<number, Set<string>>();
+  const children = (nid: number) => {
+    let res = [];
+    for (let edge of json.edges) {
+      if (edge.id[0] === "s") continue;
+      if (edge.from !== nid) continue;
+      res.push(edge);
+    }
+    return res;
+  };
+  const rec = (nid: number, prefix: string) => {
+    if (!map.has(nid)) {
+      // map.set(nid, new Set());
+      map.set(nid, []);
+    }
+    map.get(nid)!.push(prefix);
+    for (let edge of children(nid)) {
+      if (edge.from !== nid) continue;
+      rec(edge.to, prefix + edge.label);
+    }
+  };
+  rec(json.root, "");
+  for (let [k, v] of map.entries()) {
+    v.sort((a, b) => {
+      return b.length - a.length;
+    });
+  }
+  return map;
+};
+
+const show_node_str = (nid: number | null) => {
+  const elm = document.getElementById("node_str") as HTMLElement;
+  let text = "";
+  if (nid !== null) {
+    const nstrs = make_node_strs();
+    text = nstrs.get(nid)!.join("<br>");
+  }
+  elm.innerHTML = text;
 };
 
 const main = () => {
@@ -93,11 +145,21 @@ const main = () => {
     // console.log('networkData.edges', networkData.edges.get(e.edge))
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 34 } });
+    // @ts-ignore
+    const nid = networkData.edges.get(e.edge).to;
+    show_node_str(nid);
   });
   network.on("blurEdge", function (e) {
     console.log("blurEdge", e);
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 14 } });
+    show_node_str(null);
+  });
+  network.on("hoverNode", (n) => {
+    show_node_str(n.node);
+  });
+  network.on("blurNode", (n) => {
+    show_node_str(null);
   });
 
   // load and set parameters

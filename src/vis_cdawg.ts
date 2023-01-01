@@ -11,7 +11,11 @@ options.edges.smooth.type = "curvedCCW";
 
 const container = document.getElementById("network") as HTMLElement;
 const network = new Network(container, {}, options);
-let networkData = {};
+let networkData = {
+  nodes: new DataSet([]),
+  edges: new DataSet([]),
+};
+let cdawg = build_cdawg("", false);
 
 interface Params {
   input_text: string;
@@ -74,13 +78,64 @@ const set_params_to_html = (params: Params) => {
   implicit_cdawg.checked = params.implicit_cdawg;
 };
 
+const is_suffix_link = (edge: any): boolean => {
+  return edge.id[0] === "e";
+};
+
+/**
+ * Make a map from node id to the strings from root to the node.
+ */
+// const make_node_strs = (): Map<number, Set<string>> => {
+const make_node_strs = (): Map<number, string[]> => {
+  const json = cdawg.json();
+  const map = new Map<number, string[]>();
+  const children = (nid: number) => {
+    let res = [];
+    for (let edge of json.edges) {
+      if (is_suffix_link(edge)) continue;
+      if (edge.from !== nid) continue;
+      res.push(edge);
+    }
+    return res;
+  };
+  const rec = (nid: number, prefix: string) => {
+    if (!map.has(nid)) {
+      map.set(nid, []);
+    }
+    map.get(nid)!.push(prefix);
+    for (let edge of children(nid)) {
+      if (edge.from !== nid) continue;
+      rec(edge.to, prefix + edge.label);
+    }
+  };
+  console.log(json);
+  rec(0, "");
+  for (let [k, v] of map.entries()) {
+    v.sort((a, b) => {
+      return b.length - a.length;
+    });
+  }
+  return map;
+};
+
+const show_node_str = (nid: number | null) => {
+  const elm = document.getElementById("node_str") as HTMLElement;
+  console.log("nid", nid);
+  let text = "";
+  if (nid !== null) {
+    const nstrs = make_node_strs();
+    text = nstrs.get(nid)!.join("<br>");
+  }
+  elm.innerHTML = text;
+};
+
 const redraw = () => {
   // load and set parameters
   const url = new URL(window.location.toString());
   const params = load_params_from_html();
   set_params_to_url(params);
 
-  const cdawg = build_cdawg(params.input_text, params.implicit_cdawg);
+  cdawg = build_cdawg(params.input_text, params.implicit_cdawg);
   console.log(cdawg);
   const json = cdawg.json(params.show_suffix_links);
   console.log(json);
@@ -109,11 +164,21 @@ const main = () => {
     console.log("hoverEdge", e);
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 34 } });
+    // @ts-ignore
+    const nid = networkData.edges.get(e.edge).to;
+    show_node_str(nid);
   });
   network.on("blurEdge", function (e) {
     console.log("blurEdge", e);
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 14 } });
+    show_node_str(null);
+  });
+  network.on("hoverNode", (n) => {
+    show_node_str(n.node);
+  });
+  network.on("blurNode", (n) => {
+    show_node_str(null);
   });
 
   // load and set parameters

@@ -5,7 +5,12 @@ import * as visjs_default_options from "./visjs_default_options";
 const options = visjs_default_options.options;
 const container = document.getElementById("network") as HTMLElement;
 const network = new Network(container, {}, options);
-let networkData = {};
+let networkData = {
+  nodes: new DataSet([]),
+  edges: new DataSet([]),
+};
+
+let stree = suffix_tree("", false);
 
 interface Params {
   input_text: string;
@@ -66,15 +71,43 @@ const redraw = () => {
 
   console.log("input_text", params.input_text);
   console.log("show_suffix_links", params.show_suffix_links);
-  const st = suffix_tree(params.input_text, params.show_suffix_links);
-  console.log("st", st);
-  const json = st.json();
+  stree = suffix_tree(params.input_text, params.show_suffix_links);
+  console.log("st", stree);
+  const json = stree.json();
   console.log("json", json);
   networkData = {
     nodes: new DataSet(json.nodes),
     edges: new DataSet(json.edges),
   };
   network.setData(networkData);
+};
+
+const show_node_str = (nid: number | null) => {
+  const elm = document.getElementById("node_str") as HTMLElement;
+  const nstr = nid ? node_str(nid) : "";
+  elm.innerText = nstr;
+};
+
+/**
+ * Make a map from node id to the string from root to the node.
+ */
+const make_nstr = (): Map<number, string> => {
+  const json = stree.json();
+  const map = new Map<number, string>();
+  const rec = (nid: number, prefix: string) => {
+    map.set(nid, prefix);
+    for (let edge of json.edges) {
+      if (edge.from !== nid) continue;
+      rec(edge.to, prefix + edge.label);
+    }
+  };
+  rec(json.root, "");
+  return map;
+};
+
+const node_str = (nid: number): string => {
+  const nstr = make_nstr();
+  return nstr.get(nid) as string;
 };
 
 const main = () => {
@@ -90,11 +123,21 @@ const main = () => {
     console.log("hoverEdge", e);
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 34 } });
+    // @ts-ignore
+    const nid = networkData.edges.get(e.edge).to;
+    show_node_str(nid);
   });
   network.on("blurEdge", (e) => {
-    console.log("blurEdge", e);
+    console.log("blurEdge");
     // @ts-ignore
     networkData.edges.update({ id: e.edge, font: { size: 14 } });
+    show_node_str(null);
+  });
+  network.on("hoverNode", (n) => {
+    show_node_str(n.node);
+  });
+  network.on("blurNode", (n) => {
+    show_node_str(null);
   });
 
   // load and set parameters
