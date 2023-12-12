@@ -128,7 +128,7 @@ class State {
         ? (this.parent.out_edges.get(char) as Edge)
         : this.edge;
       const match_len = this.atNode ? 0 : this.match_len;
-      if (match_len + 1 < edge.len) {
+      if (match_len + 1 <= edge.len) {
         return new State(this.parent, edge, match_len + 1);
       } else {
         return State.create_at_node_state(edge.child);
@@ -273,8 +273,8 @@ class CDAWG {
 
   insert(char: string) {
     console.log();
-    console.log("insert char[", char, "]");
     this.text += char;
+    console.log("insert char[", char, "], text=", this.text);
     if (this.text.length === 1) {
       this.create_open_edge(this.root, 0);
       this.ap = new State(this.root);
