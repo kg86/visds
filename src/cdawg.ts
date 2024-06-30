@@ -347,6 +347,10 @@ class CDAWG {
     } else {
       this.sink.slink = this.sink;
     }
+    // if the active point is at the end of the edge, move to the next node.
+    if (this.ap.edge.len === this.ap.match_len) {
+      this.ap = new State(this.ap.edge.child);
+    }
     console.log("insert end, ap is", this.ap);
   }
 
