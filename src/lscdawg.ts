@@ -10,14 +10,12 @@ class CNode {
   slink: CNode;
   is_explicit: boolean;
   out_edges: Map<string, Edge>;
-  in_edges: Array<Edge>;
   constructor(value: number, birth_time: number, is_explicit: boolean) {
     this.value = value;
     this.birth_time = birth_time;
     this.slink = this;
     this.is_explicit = is_explicit;
     this.out_edges = new Map();
-    this.in_edges = [];
   }
 }
 
@@ -84,12 +82,20 @@ class LSCDAWG {
 
       for (const lst_child of lst_node.children.values()) {
         const cdawg_child = lst_node_correspondence[lst_child.birth_time]!;
-        const edge = new Edge(lst_child.birth_time, lst_child.in_edge_label, cdawg_node, cdawg_child);
-        this.edges.push(edge);
-        cdawg_node.out_edges.set(lst_child.in_edge_label, edge);
-        cdawg_child.in_edges.push(edge);
+        if (!cdawg_node.out_edges.has(lst_child.in_edge_label)) {
+          const edge = new Edge(lst_child.birth_time, lst_child.in_edge_label, cdawg_node, cdawg_child);
+          this.edges.push(edge);
+          cdawg_node.out_edges.set(lst_child.in_edge_label, edge);
+        }
       }
     }
+
+    for(const node of this.nodes) {
+      if (node.is_explicit) {
+        node.value = num_explicit_nodes - node.value - 1;
+      }
+    }
+
     this.root = lst_node_correspondence[lstrie.root.birth_time]!;
 
     console.log(Array.from(lstrie.slinks.entries()));
@@ -114,8 +120,6 @@ class LSCDAWG {
           label: node.is_explicit ? node.value.toString() : "",
           id: json_node_id,
           level: -1,
-          // level: use_depth ? depth : height - node.height,
-          // shape: node.is_leaf ? "box" : "circle",
           color: {
             border: node.is_explicit ? "#2B7CE9" : "#000000",
             background: node.is_explicit ? "#D2E5FF" : "#000000",
