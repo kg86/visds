@@ -1,8 +1,5 @@
 // Linear-size CDAWG
-import { LargeNumberLike } from "crypto";
 import { build_lstrie, StrTree } from "./lstrie";
-
-type ElementType<T> = T extends (infer U)[] ? U : never;
 
 class CNode {
   birth_time: number;
@@ -42,18 +39,14 @@ class Edge {
 }
 
 class LSCDAWG {
-  lstrie: StrTree;
   root: CNode;
   nodes: Array<CNode>;
   edges: Array<Edge>;
 
-  // build this from CDAWG
+  // obtain a lscdawg by merging isomorphics subtrees of the lstrie
   constructor(lstrie: StrTree) {
-    // obtain a lscdawg by merging isomorphics subtrees of the lstrie
-    
     this.nodes = [];
     this.edges = [];
-    this.lstrie = lstrie;
 
     const cdawg_node_map = new Map<string, CNode>();
     const lst_node_correspondence = new Array<CNode | undefined>(lstrie.nodes.length);
@@ -201,7 +194,6 @@ class LSCDAWG {
     }
     console.log("json_nodes", json_nodes.length, "json_edges", json_edges.length);
     return { nodes: json_nodes, edges: json_edges };
-    // return this.lstrie?.json;
   }
 }
 
