@@ -42,7 +42,7 @@ class Node {
   }
 }
 
-class StrTree {
+export class StrTree {
   root: Node;
   nodes: Array<Node>;
   slinks: Map<Node, Node>;
