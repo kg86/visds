@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CHP991L8GM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-CHP991L8GM');
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+
+    <title>Visualization of Linear Size CDAWG</title>
+
+    <link rel="stylesheet" type="text/css" href="./my.css" />
+    <link rel="stylesheet" type="text/css" href="./vis-network.min.css" />
+  </head>
+
+  <body>
+    <h2>Visualization of Linear Size CDAWG</h2>
+
+    <input id="input_text" type="text" value="cocoa" style="font-size:32px;" />
+    <br />
+    Show Suffix Links:
+    <input id="show_suffix_links" type="checkbox" checked />
+    <br />
+    Show Extended Suffix Links:
+    <input id="show_extended_suffix_links" type="checkbox" checked />
+    <br />
+
+    <div id="network"></div>
+
+    <p id="selection"></p>
+
+    <div style="width: 600px; margin: auto;">
+      <h2>Links</h2>
+      <ul style="list-style-type: disc; text-align: left;">
+        <li>
+          <a
+            href="https://www.researchgate.net/publication/319485678"
+            >Paper of Linear Size CDAWG
+          </a>
+        </li>
+        <li>
+          <a href="https://kg86.github.io/visds/">Data Structure Visualizer</a>
+        </li>
+      </ul>
+    </div>
+    <script type="text/javascript" src="./vis_lscdawg.js"></script>
+  </body>
+</html>
