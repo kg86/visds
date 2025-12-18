@@ -2,28 +2,37 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - 'main'
+      - "main"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
 
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
 
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build --if-present
-        webpack
-        npx typedoc src/*.ts
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: npm
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build
+      run: npm run build --if-present
+
+    - name: Generate docs
+      run: npx typedoc src/*.ts
 
     - name: move files
       run: |
-        mkdir public
-        mv dist public/
-        mv docs public/
-        mv _config.yml public/
-        mv README.md public/
+        mkdir -p public
+        if [ -d dist ]; then cp -r dist public/; fi
+        if [ -d docs ]; then cp -r docs public/; fi
+        cp _config.yml README.md public/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
