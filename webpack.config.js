@@ -14,6 +14,7 @@ module.exports = {
     vis_dag: "./src/vis_dag.ts",
     vis_dawg: "./src/vis_dawg.ts",
     vis_cdawg: "./src/vis_cdawg.ts",
+    vis_lscdawg: "./src/vis_lscdawg.ts",
     cdawg: "./src/cdawg.ts",
     vis_lstrie: "./src/vis_lstrie.ts",
     vis_sa: "./src/vis_sa.ts",
